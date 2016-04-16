@@ -94,8 +94,9 @@ public class LoginFragment extends Fragment {
     public void onAddButtonClicked(View v){
         mUserName = mLoginEditText.getText().toString().trim();
         if(mUserName != null) {
-            mUser = mUserSQLiteHelper.getUser(mUserName);
-            if(mUser != null) {
+//            mUser = mUserSQLiteHelper.getUser(mUserName);
+//            if(mUser != null) {
+            if(mUserSQLiteHelper.checkUser(mUserName) == true){
                 Snackbar snackbar = Snackbar.make(v, getString(R.string.snackbar_error_text_2), Snackbar.LENGTH_LONG);
                 snackbar.show();
             } else {

@@ -24,8 +24,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, AddPinD
 
     public static final String ARG_USER = "MapFragment.User";
 
-    public Bundle mArgs;
-
     private GoogleMap mMap;
 
     private String mUserName;

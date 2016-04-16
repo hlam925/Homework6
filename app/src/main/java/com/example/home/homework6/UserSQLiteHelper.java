@@ -82,12 +82,15 @@ public class UserSQLiteHelper extends SQLiteOpenHelper {
     }
 
     public User getUser(String userName){
-        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + User.TABLE_NAME +
-                " WHERE " + User.COL_NAME + " = " + userName, null);
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + User.TABLE_NAME, null);
 
         if(cursor.moveToFirst()) {
             do {
-                return new User(userName);
+                String name = getCursorString(cursor, User.COL_NAME);
+                if(name.equals(userName)) {
+                    cursor.close();
+                    return new User(userName);
+                }
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -102,7 +105,7 @@ public class UserSQLiteHelper extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()){
             do {
-                long id = getCursorLong(cursor, User._ID);
+//                long id = getCursorLong(cursor, User._ID);
                 String name = getCursorString(cursor, User.COL_NAME);
                 users.add(new User(name));
             } while(cursor.moveToNext());
@@ -112,21 +115,22 @@ public class UserSQLiteHelper extends SQLiteOpenHelper {
         return users;
     }
 
-    public ArrayList<Pin> getAllPins(String name){
+    public ArrayList<Pin> getAllPins(String userName){
         ArrayList<Pin> pins = new ArrayList<Pin>();
 
-        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + Pin.TABLE_NAME + "WHERE " +
-                Pin.COL_USER_NAME + " = " + name, null);
+        Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM " + Pin.TABLE_NAME, null);
 
         if(cursor.moveToFirst()){
             do {
-                long id = getCursorLong(cursor, Pin._ID);
-                double lat = getCursorDouble(cursor, Pin.COL_LAT);
-                double lng = getCursorDouble(cursor, Pin.COL_LNG);
-                String title = getCursorString(cursor, Pin.COL_TITLE);
-                String snippet = getCursorString(cursor, Pin.COL_SNIPPET);
-                String userName = getCursorString(cursor, Pin.COL_USER_NAME);
-                pins.add(new Pin(lat, lng, title, snippet, userName));
+//                long id = getCursorLong(cursor, Pin._ID);
+                String name = getCursorString(cursor, Pin.COL_USER_NAME);
+                if(name.equals(userName)) {
+                    double lat = getCursorDouble(cursor, Pin.COL_LAT);
+                    double lng = getCursorDouble(cursor, Pin.COL_LNG);
+                    String title = getCursorString(cursor, Pin.COL_TITLE);
+                    String snippet = getCursorString(cursor, Pin.COL_SNIPPET);
+                    pins.add(new Pin(lat, lng, title, snippet, name));
+                }
             } while(cursor.moveToNext());
         }
         cursor.close();

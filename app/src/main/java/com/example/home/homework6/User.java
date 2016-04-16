@@ -10,7 +10,7 @@ import android.provider.BaseColumns;
 public class User implements BaseColumns {
 
     private String mName;
-    private long mUserId;
+//    private long mUserId;
 
 
     public static final String TABLE_NAME = "users";
@@ -19,21 +19,21 @@ public class User implements BaseColumns {
 
     public User(String name) {
         mName = name;
-        mUserId = Long.parseLong(this._ID);
+//        mUserId = this._ID;
     }
 
     public String getName() {
         return mName;
     }
 
-    public long getUserId(){
-        return mUserId;
-    }
+//    public long getUserId(){
+//        return mUserId;
+//    }
 
 
     public ContentValues getContentValues(){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(_ID, mUserId);
+//        contentValues.put(_ID, mUserId);
         contentValues.put(COL_NAME, mName);
         return contentValues;
     }

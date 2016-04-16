@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
  */
 public class Pin implements BaseColumns {
 
-    private long mPinId;
+//    private long mPinId;
     private double mLat;
     private double mLng;
     private String mTitle;
@@ -23,7 +23,7 @@ public class Pin implements BaseColumns {
     public static final String COL_USER_NAME = "user name";
 
     public Pin(double lat, double lng, String title, String snippet, String userName){
-        mPinId = Long.parseLong(this._ID);
+//        mPinId = Long.parseLong(this._ID);
         mLat = lat;
         mLng = lng;
         mTitle = title;
@@ -32,9 +32,9 @@ public class Pin implements BaseColumns {
     }
 
 
-    public long getPinId() {
-        return mPinId;
-    }
+//    public long getPinId() {
+//        return mPinId;
+//    }
 
     public double getLat() {
         return mLat;
