@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/fragment_login_edittext"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:singleLine="true"
+            android:background="@drawable/edittext_style"
+            android:hint="@string/fragment_login_edittext_hint"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            />
+
+        <Button
+            android:id="@+id/fragment_login_login_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_login_login_button_text"
+            android:layout_below="@id/fragment_login_edittext"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/fragment_login_adduser_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_login_adduser_button_text"
+            android:layout_below="@id/fragment_login_login_button"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+</FrameLayout>

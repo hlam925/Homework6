@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Homework6</string>
+    <string name="fragment_login_edittext_hint">Enter username</string>
+    <string name="fragment_login_login_button_text">Login</string>
+    <string name="fragment_login_adduser_button_text">Add user</string>
+    <string name="fragmen_map_logout_button_text">Log Out</string>
+    <string name="snackbar_error_text_2">User already exists!</string>
+    <string name="snackbar_error_text_1">User does not exist!</string>
+    <string name="fragment_dialog_title_edittext_hint">Enter title</string>
+    <string name="fragment_dialog_snippet_edittext_hint">Enter description</string>
+    <string name="fragment_dialog_ok_button_text">OK</string>
+    <string name="addpindialogfragment_title_text">Add Pin!</string>
+</resources>
