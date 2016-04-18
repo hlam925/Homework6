@@ -17,6 +17,8 @@ import butterknife.ButterKnife;
  */
 public class AddPinDialogFragment extends DialogFragment {
 
+    public static final String ARG_LISTENER = "AddPinDialogFragment.listener";
+
     public static final String ARG_LATLNG = "AddPinDialogFragment.latlng";
 
     @Nullable public String mTitle;
@@ -38,6 +40,7 @@ public class AddPinDialogFragment extends DialogFragment {
     }
 
     public AddPinDialogFragment() {
+
     }
 
     public static AddPinDialogFragment newInstance(){
@@ -45,32 +48,41 @@ public class AddPinDialogFragment extends DialogFragment {
         return fragment;
     }
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dialog, container, false);
         ButterKnife.bind(this, rootView);
 
-        mTitle = mTitleEditText.getText().toString().trim();
-        mSnippet = mSnippetEditText.getText().toString().trim();
+//        mTitle = mTitleEditText.getText().toString().trim();
+//        mSnippet = mSnippetEditText.getText().toString().trim();
 
 //
+        mAddPinListener = (AddPinListener) getActivity();
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 mAddPinListener.onAddPinClicked(getTitle(), getSnippet());
             }
         });
 
+
         return rootView;
     }
 
+
     public String getTitle(){
+        mTitle = mTitleEditText.getText().toString().trim();
         return mTitle;
     }
 
     public String getSnippet(){
+
+        mSnippet = mSnippetEditText.getText().toString().trim();
         return mSnippet;
     }
 

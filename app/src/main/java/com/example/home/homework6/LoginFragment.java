@@ -81,7 +81,7 @@ public class LoginFragment extends Fragment {
             mUser = mUserSQLiteHelper.getUser(mUserName);
             if (mUser != null) {
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.activity_main_framelayout, MapFragment.newInstance(mUserName));
+                transaction.replace(R.id.activity_main_framelayout, MapFragment.newInstance(mUserName), getString(R.string.map_fragment_tag));
                 transaction.commit();
             } else {
                 Snackbar snackbar = Snackbar.make(v, getString(R.string.snackbar_error_text_1), Snackbar.LENGTH_LONG);
@@ -102,7 +102,7 @@ public class LoginFragment extends Fragment {
             } else {
                 mUserSQLiteHelper.insertUser(new User(mUserName));
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.activity_main_framelayout, MapFragment.newInstance(mUserName));
+                transaction.replace(R.id.activity_main_framelayout, MapFragment.newInstance(mUserName), getString(R.string.map_fragment_tag));
                 transaction.commit();
             }
         }

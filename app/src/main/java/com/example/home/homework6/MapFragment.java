@@ -20,7 +20,8 @@ import java.util.ArrayList;
 /**
  * Created by Home on 4/5/16.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback, AddPinDialogFragment.AddPinListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback {
+
 
     public static final String ARG_USER = "MapFragment.User";
 
@@ -128,10 +129,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, AddPinD
         }
     }
 
-    @Override
-    public void onAddPinClicked(String title, String snippet) {
-        Pin pin = new Pin(mLatitude, mLongitude, title, snippet, mUserName);
-        mUserSQLiteHelper.insertPin(pin);
+    public void onAddPin(String title, String snippet) {
+//        Pin pin = new Pin(mLatitude, mLongitude, title, snippet, mUserName);
+        mUserSQLiteHelper.insertPin(new Pin(mLatitude, mLongitude, title, snippet, mUserName));
     }
 
     @Override
@@ -157,4 +157,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, AddPinD
         super.onLowMemory();
         mMapView.onLowMemory();
     }
+
+
 }
