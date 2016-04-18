@@ -24,6 +24,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, AddPinD
 
     public static final String ARG_USER = "MapFragment.User";
 
+    private MapView mMapView;
+
     private GoogleMap mMap;
 
     private String mUserName;
@@ -45,21 +47,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, AddPinD
         return mapFragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mUserName = this.getArguments().toString();
-
-        mUserSQLiteHelper = UserSQLiteHelper.getuInstance(getActivity().getApplicationContext());
-
-        mPins = mUserSQLiteHelper.getAllPins(mUserName);
-        for(int i=0; i < mPins.size(); i++){
-            placePin(mPins.get(i));
-        }
-
-
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//        mUserName = this.getArguments().toString();
+//
+//        mUserSQLiteHelper = UserSQLiteHelper.getuInstance(getActivity().getApplicationContext());
+//
+//        mPins = mUserSQLiteHelper.getAllPins(mUserName);
+//        for(int i=0; i < mPins.size(); i++){
+//            placePin(mPins.get(i));
+//        }
+//
+//
+//    }
 
     @Nullable
     @Override
@@ -67,8 +69,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, AddPinD
 
         View rootView = inflater.inflate(R.layout.fragment_map, container, false);
 
-        MapView mapView = (MapView) new MapView(getContext()).findViewById(R.id.fragment_map_map);
-        mapView.getMapAsync(this);
+        mMapView = (MapView) rootView.findViewById(R.id.fragment_map_mapview);
+        mMapView.onCreate(savedInstanceState);
+        mMapView.getMapAsync(this);
+
+        mUserName = this.getArguments().toString();
+
+        mUserSQLiteHelper = UserSQLiteHelper.getuInstance(getActivity().getApplicationContext());
+
+        mPins = mUserSQLiteHelper.getAllPins(mUserName);
+        for (int i = 0; i < mPins.size(); i++) {
+            placePin(mPins.get(i));
+        }
+
+//        mapView.getMapAsync(this);
 
 
         return rootView;
@@ -78,6 +92,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, AddPinD
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(true);
 
@@ -96,7 +111,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, AddPinD
 
 
     }
-
 
 
     public void placePin(Pin pin) {
@@ -118,5 +132,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, AddPinD
     public void onAddPinClicked(String title, String snippet) {
         Pin pin = new Pin(mLatitude, mLongitude, title, snippet, mUserName);
         mUserSQLiteHelper.insertPin(pin);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mMapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mMapView.onLowMemory();
     }
 }
